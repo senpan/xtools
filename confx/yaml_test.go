@@ -7,7 +7,6 @@ import (
 	. "github.com/onsi/gomega"
 
 	"github.com/senpan/xtools/confx"
-	"github.com/senpan/xtools/flagx"
 )
 
 type YamlStruct struct {
@@ -18,8 +17,9 @@ type YamlStruct struct {
 var _ = Describe("Yaml", func() {
 	BeforeEach(func() {
 		confx.Reset()
-		flagx.SetConfig("testdata/conf.yaml")
+		confx.InitConfig(confx.WithConfig("testdata/conf.yaml"), confx.WithConfigPathPrefix(pwd))
 	})
+
 	Context("GetConf", func() {
 		It("empty", func() {
 			conf := confx.GetConf("Yaml", "empty")

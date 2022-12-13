@@ -1,9 +1,7 @@
 package confx
 
 import (
-	"io/ioutil"
 	"log"
-	"os"
 	"strings"
 
 	"github.com/spf13/cast"
@@ -18,19 +16,8 @@ type YamlFile struct {
 }
 
 // load yaml file
-func loadYamlFile(path string) (cfg Config, err error) {
-	// read file
-	content, ie := ioutil.ReadFile(path)
-	if ie != nil {
-		err = ie
-		log.Printf("loadYamlFile error: %v", ie)
-		return nil, err
-	}
+func loadYamlFile(content []byte) (cfg Config, err error) {
 	data := make(map[string]interface{}, 0)
-
-	// customizes the config to use environment variables.
-	content = []byte(os.ExpandEnv(string(content)))
-
 	// convert bytes to map
 	err = yaml.Unmarshal(content, &data)
 	if err != nil {

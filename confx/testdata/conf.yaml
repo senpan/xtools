@@ -17,3 +17,6 @@ YamlObject:
   - host: public3
     port: 9094
 
+YamlEnv:
+  env: ${XTOOLS_ENV}
+  env2: ${XTOOLS_ENV2}

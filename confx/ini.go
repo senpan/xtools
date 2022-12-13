@@ -1,9 +1,6 @@
 package confx
 
 import (
-	"io/ioutil"
-	"log"
-	"os"
 	"strings"
 
 	goini "gopkg.in/ini.v1"
@@ -16,17 +13,7 @@ type IniFile struct {
 }
 
 // load function
-func loadIniFile(path string) (cfg Config, err error) {
-	// load file
-	content, ie := ioutil.ReadFile(path)
-	if ie != nil {
-		err = ie
-		log.Printf("loadIniFile error: %v", ie)
-		return nil, err
-	}
-	// customizes the config to use environment variables.
-	content = []byte(os.ExpandEnv(string(content)))
-
+func loadIniFile(content []byte) (cfg Config, err error) {
 	config := new(IniFile)
 	file, err := goini.Load(content)
 	config.File = file

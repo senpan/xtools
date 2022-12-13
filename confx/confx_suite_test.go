@@ -1,13 +1,14 @@
 package confx_test
 
 import (
+	"os"
 	"testing"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-
-	"github.com/senpan/xtools/confx"
 )
+
+var pwd string
 
 func TestConfx(t *testing.T) {
 	RegisterFailHandler(Fail)
@@ -15,5 +16,5 @@ func TestConfx(t *testing.T) {
 }
 
 var _ = BeforeSuite(func() {
-	confx.SetConfPathPrefixByPwd()
+	pwd, _ = os.Getwd()
 })

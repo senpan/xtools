@@ -8,7 +8,6 @@ import (
 	. "github.com/onsi/gomega"
 
 	"github.com/senpan/xtools/confx"
-	"github.com/senpan/xtools/flagx"
 )
 
 type IniStruct struct {
@@ -22,8 +21,9 @@ type IniStruct struct {
 var _ = Describe("Ini", func() {
 	BeforeEach(func() {
 		confx.Reset()
-		flagx.SetConfig("testdata/conf.ini")
+		confx.InitConfig(confx.WithConfig("testdata/conf.ini"), confx.WithConfigPathPrefix(pwd))
 	})
+
 	Context("GetConf", func() {
 		It("empty", func() {
 			conf := confx.GetConf("iniConfig", "empty")
